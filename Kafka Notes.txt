@@ -1,0 +1,77 @@
+19-09-2022
+-------------------------------
+Download and Installation
+
+STEP 1: GET KAFKA
+Download the latest Kafka release and extract it:
+Download Link : https://kafka.apache.org/downloads
+
+Extract the tar file :  kafka_2.13-3.2.1.tgz
+
+Paste it in c: drive and rename it with "kafka" folder.
+-------------------------------
+Step 2 
+Locate the server.properties file inside the kafka/config folder and change the log directory
+as below,
+
+log.dirs=c:/kafka/kafka-logs
+-------------------------------
+Step 3 
+Locate the zookeeper.properties file inside the kafka/config folder and change the data directory
+as below,
+
+dataDir=c:/kafka/zookeeper-data
+-------------------------------
+STEP 4.1: START THE KAFKA ENVIRONMENT
+NOTE: Your local environment must have Java 8+ installed.
+
+Run the following commands in order to start all services in the correct order:
+
+# Start the ZooKeeper service
+# Note: Soon, ZooKeeper will no longer be required by Apache Kafka.
+
+C:\kafka>.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+----------------------------------
+STEP 4.2:
+Open another terminal session and run:
+# Start the Kafka broker service
+
+C:\kafka>.\bin\windows\kafka-server-start.bat .\config\server.properties
+----------------------------------
+
+Kafka Commands:
+
+Creating a new Topic:
+
+C:\kafka>.\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic NewTopic
+----------------------------------
+Listing Topic:
+C:\kafka>.\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+----------------------------------
+How to produce messages in a topic:
+C:\kafka>.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic TestTopic
+------------------------------------------------------------------------------------------------------
+How to consume messages from the topic:
+C:\kafka>.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic TestTopic --from-beginning
+-------------------------------------------------------------------------------------------------------------------------------------
+How to describe the topic:
+C:\kafka>.\bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --describe --topic myTopic
+
+-------------------------------------------------------------------------------------------------------------------------------------
+Listing Consumer Groups
+C:\kafka>.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --list
+console-consumer-38049
+-------------------------------------------------------------------------------------------------------------------------------------
+Describe Consumer Group
+C:\kafka>.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --describe --group console-consumere Consumer Group:
+
+------------------------------------
+Name the Consumer Group
+C:\kafka>.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic myTopic --group myConsumerGroup
+
+-------------------------------------------------------------------------------------------------
+
+How to Run the 3 ZooKeeper nodes.
+
+
+
